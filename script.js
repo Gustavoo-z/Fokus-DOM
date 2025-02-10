@@ -72,6 +72,11 @@ const contagemRegressiva = () => {
     if(tempoDecorrido <= 0) {
         beep.play()
         alert('Tempo finalizado')
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco'
+        if (focoAtivo) {
+            const evento = new CustomEvent('FocoFinalizado')
+            document.dispatchEvent(evento)
+        }
         zerar()
         return;
     }
@@ -83,7 +88,7 @@ botaoComecar.addEventListener('click', iniciarOuPausar)
 
 function iniciarOuPausar() {
     if (tempoDecorrido === 0) {
-        tempoDecorrido = 5;
+        tempoDecorrido = 1500;
     }
     if(intervaloId) {
         pause.play()
